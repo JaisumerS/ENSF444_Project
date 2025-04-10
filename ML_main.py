@@ -33,8 +33,8 @@ fake_df = pd.read_csv(os.path.join(base_path, "Fake.csv"))
 true_df = pd.read_csv(os.path.join(base_path, "True.csv"))
 
 # checking whether they loaded in correctly
-display(fake_df.head())
-display(true_df.head())
+#display(fake_df.head())
+#display(true_df.head())
 
 '''
 Step 2 of the ML Workflow: Data processing
@@ -42,6 +42,7 @@ Step 2 of the ML Workflow: Data processing
 '''
 
 # Checking to see whether there are any missing values
+'''
 print("Missing values in fake news file:")
 print(fake_df.isnull().sum())
 
@@ -57,6 +58,7 @@ fake_type_counts = fake_types_df.nunique()
 
 print("\nUnique datatypes in true news file: \n", true_type_counts)
 print("\nUnique datatypes in fake news file: \n", fake_type_counts)
+'''
 
 # Adding labels to fake and true news data, where fake = 1 and true = 0
 fake_df['label'] = 1
