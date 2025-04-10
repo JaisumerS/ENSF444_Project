@@ -1,3 +1,13 @@
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.pipeline import Pipeline
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.svm import LinearSVC
+from sklearn.model_selection import GridSearchCV
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, roc_curve, auc, precision_recall_curve, average_precision_score, confusion_matrix
+import seaborn as sns
+import matplotlib.pyplot as plt
+
 def create_pipeline(model_name="1"):
     vectorizer = TfidfVectorizer(stop_words='english', max_df=0.6, max_features=1000)
     if model_name.lower() == "3":
@@ -30,7 +40,7 @@ def metrics(pipeline, X_train, y_train, X_test, y_test, y_pred):
     param_grid = {
         'tfidf__max_df': [0.6, 0.7],
         'tfidf__max_features': [500, 1000],
-        'svm__C': [0.001, 0.01, 0.1]
+        'classifier__C': [0.001, 0.01, 0.1]
     }
     
     grid = GridSearchCV(pipeline, param_grid, cv=5, scoring='accuracy', n_jobs=-1)

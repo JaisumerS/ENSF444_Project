@@ -3,16 +3,8 @@ import kagglehub
 import pandas as pd
 import os
 from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.pipeline import Pipeline
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.svm import LinearSVC
 from ML_models import create_pipeline, inputters, metrics
-from sklearn.model_selection import GridSearchCV
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, roc_curve, auc, precision_recall_curve, average_precision_score, confusion_matrix
-import seaborn as sns
-import matplotlib.pyplot as plt
 
 # Download latest version
 path = kagglehub.dataset_download("emineyetm/fake-news-detection-datasets")
@@ -77,7 +69,7 @@ y = df['label']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=0)
 
 # Creating a pipeline with a TF-IDF transformer and an SVM (LinearSVC) classifier or one to admin choosing
-model = input("<><><>For Admin<><><>\nChoose a model out of \n1.SVC Model\n2.Multinomial NB\n3.Random Forest, press the number of the model or click enter")
+model = input("<><><>For Admin<><><>\nChoose a model out of \n1.SVC Model\n2.Multinomial NB\n3.Random Forest\nPress the number of the model and click enter: ")
 pipeline = create_pipeline(model)
 
 # Fitting the pipeline to the training data
@@ -88,10 +80,18 @@ y_pred = pipeline.predict(X_test)
 
 
 metricview = input("Would you like to see the metrics of the model used (WARNING: may take a minute)? Enter y or n for yes or no: ")
-if metricview.low() == 'y':
+if metricview.lower() == 'y':
     metrics(pipeline, X_train, y_train, X_test, y_test, y_pred)
-elif metricview.low() == 'n':
+elif metricview.lower() == 'n':
     print("Be sure to comeback for Fact or Fiction News Checking!!!!")
     print("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>")
 
 fullarticle = inputters()
+
+full_article_pred = pipeline.predict([fullarticle])
+
+# Print the prediction result in a human-friendly format.
+if full_article_pred[0] == 1:
+    print("The full article is predicted to be: Fake News")
+else:
+    print("The full article is predicted to be: True News")
