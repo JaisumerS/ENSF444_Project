@@ -12,14 +12,15 @@ The primary way to use our fake news detection system is through the `ML_main.py
 pip install kagglehub[pandas-datasets]
 ```
 
-2. After installation, run the interface using the command:
+2. Check out the required libraries in both `ML_models.py` and `ML_main.py` to see whether you need to download any more libraries.
+3. After installation, run the interface using the command:
 
 ```bash
 python ML_main.py
 ```
 
-3. Follow the on-screen prompts to enter a news title and text.
-4. The system will process your input and return predictions from all three models.
+4. Follow the on-screen prompts to enter a news title and text.
+5. The system will process your input and return predictions from all three models.
 
 ### Optional: View Model Metrics in the Interface
 If you're curious about how each model performs, the interface also gives you the option to display key evaluation metrics (like accuracy, precision, recall, and F1 score).  
