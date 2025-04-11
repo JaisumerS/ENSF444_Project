@@ -9,13 +9,15 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 def create_pipeline(model_name="1"):
-    vectorizer = TfidfVectorizer(stop_words='english', max_df=0.6, max_features=1000)
     if model_name.lower() == "3":
+        vectorizer = TfidfVectorizer(stop_words='english', max_df=0.7)
         classifier = RandomForestClassifier(n_estimators=75, random_state=42, max_depth = 5)
     elif model_name.lower() == "2":
+        vectorizer = TfidfVectorizer()
         classifier = MultinomialNB()
     elif model_name.lower() == "1":
         classifier = LinearSVC(random_state=0, C=0.001)
+        vectorizer = TfidfVectorizer(stop_words='english', max_df=0.6, max_features=1000)
     else:
         raise ValueError("Model not recognized. Choose '1', '2', or '3'.")
     
